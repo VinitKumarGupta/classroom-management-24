@@ -28,8 +28,14 @@ body {
     border-right: 1px solid #ddd;
 }
 
+.logo i {
+    font-size: 30px;
+    color: #3b82f6;
+    margin-bottom: 10px;
+}
+
 .logo h2 {
-    font-size: 22px;
+    font-size: 25px;
     margin-bottom: 20px;
 }
 
@@ -45,10 +51,13 @@ body {
     text-decoration: none;
     color: #333;
     font-size: 16px;
-    display: block;
+    display: flex; /* Changed from block to flex */
+    align-items: center; /* Aligns text and circles vertically */
+    justify-content: space-between; /* Spaces the text and circles horizontally */
     padding: 10px 15px;
     border-radius: 8px;
     transition: background-color 0.2s;
+    height: 50px; /* Ensures uniform height for all */
 }
 
 .sidebar nav ul li a:hover {
@@ -99,6 +108,13 @@ body {
 .section-header {
     display: flex;
     align-items: center;
+    /* justify-content: space-between; */
+    gap: 15px;
+}
+
+.section-header-1 {
+    display: flex;
+    align-items: center;
     justify-content: space-between;
     gap: 15px;
 }
@@ -107,14 +123,23 @@ body {
     font-size: 20px;
 }
 
-.attendance-tracking,
 .homework-tracking,
 .student-profiles {
+    margin-top: 1em;
     display: flex;
     gap: 15px;
 }
 
-.class-card,
+.class-card {
+    background-color: #f0f4ff;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);    
+    display: none;
+}
+
 .homework-card,
 .profile-card,
 .announcement-card {
@@ -135,12 +160,12 @@ body {
 .announcement-card {
     background-color: #ffe4e6;
 }
-
+/* 
 .file-upload-inline {
     display: flex;
     align-items: center;
     gap: 10px;
-}
+} */
 
 #date-picker,
 #announcement-deadline,
@@ -150,6 +175,9 @@ body {
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
+}
+
+#date-picker {
 }
 
 #file-upload,
@@ -233,31 +261,87 @@ body {
     background-color: rgba(0, 0, 0, 0.1);
 }
 .count-badge {
-    background-color: #ff6b6b; /* Red color for the count badge */
-    color: white;
+    background-color: #f00; /* Example background color */
+    color: #fff;
+    font-weight: bolder;
     border-radius: 50%;
-    padding: 5px 10px;
-    font-size: 14px;
-    font-weight: bold;
-    margin-left: 11rem;
-    display: inline-block;
-    text-align: center;
-    min-width: 24px;
+    width: 24px;
     height: 24px;
-    line-height: 16px;
-    position: relative;
-    right: 20px; /* Adjust positioning to the right */
-    top: 50%;
-    transform: translateY(-50%); /* Center the badge vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px; /* Size of the number inside the circle */
 }
 .delete-icon {
     font-size: 18px;
     position: absolute;
     right: 10px; /* Adjust this value to change the horizontal position */
-    top: 10px;   /* Adjust this value to change the vertical position */
+    top: 10px; /* Adjust this value to change the vertical position */
     cursor: pointer;
     background: none;
     border: none;
     margin: 5px; /* You can add or adjust this for extra spacing */
     padding: 5px; /* You can add or adjust this for extra spacing */
+}
+
+#announcement-display {
+    margin-top: 20px;
+}
+
+.announcement-item {
+    background-color: #ffe6e6; /* Light pink background */
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    border: 2px solid #ffcccc; /* Light red border */
+}
+
+.announcement-item p {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* Bold for announcement, normal for deadline */
+.announcement-text {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.deadline-text {
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+/* Delete icon button */
+.delete-icon {
+    font-size: 18px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+/* Post button */
+#post-announcement-btn {
+    margin-left: 10px;
+    padding: 5px 15px;
+}
+
+/* Input styling */
+#announcement-input {
+    width: 300px;
+    padding: 5px;
+}
+
+#announcement-deadline {
+    padding: 5px;
+}
+
+.faculty-timetable {
+    width: 100%;
+    padding-top: 1em;
 }
