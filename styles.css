@@ -177,9 +177,6 @@ body {
     border: 1px solid #ccc;
 }
 
-#date-picker {
-}
-
 #file-upload,
 #attendance-upload {
     width: 100%;
@@ -261,7 +258,7 @@ body {
     background-color: rgba(0, 0, 0, 0.1);
 }
 .count-badge {
-    background-color: #f00; /* Example background color */
+    background-color: rgb(82, 75, 75); /* Example background color */
     color: #fff;
     font-weight: bolder;
     border-radius: 50%;
