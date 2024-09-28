@@ -1,0 +1,263 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: auto;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #f0f4ff;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+}
+
+.logo h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+}
+
+.sidebar nav ul li {
+    margin: 15px 0;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: #e0e7ff;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h2 {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.header-buttons button {
+    margin-left: 10px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.settings-btn {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.logout-btn {
+    background-color: #ef4444;
+    color: white;
+}
+
+.sections .section {
+    margin-bottom: 20px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.section-header h3 {
+    font-size: 20px;
+}
+
+.attendance-tracking,
+.homework-tracking,
+.student-profiles {
+    display: flex;
+    gap: 15px;
+}
+
+.class-card,
+.homework-card,
+.profile-card,
+.announcement-card {
+    background-color: #f0f4ff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    flex: 1;
+}
+
+.profile-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.announcement-card {
+    background-color: #ffe4e6;
+}
+
+.file-upload-inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#date-picker,
+#announcement-deadline,
+#file-upload,
+#attendance-upload,
+#announcement-input {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#file-upload,
+#attendance-upload {
+    width: 100%;
+    max-width: 200px;
+}
+
+#announcement-form {
+    margin-bottom: 15px;
+}
+
+#announcement-input,
+#announcement-deadline {
+    margin-right: 10px;
+}
+/* Styling the delete button inside the announcement */
+.delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px;
+    color: red;
+    margin-left: 10px;
+    vertical-align: middle;
+    float: right;
+}
+
+.delete-btn:hover {
+    color: darkred;
+}
+.announcement-card {
+    background-color: #ffe4e6;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative; /* For the delete button */
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between; /* Space between text and delete button */
+    align-items: center; /* Align items vertically */
+    padding-right: 40px; /* Add extra padding to avoid overlap with the delete button */
+}
+
+.announcement-text-container {
+    display: flex;
+    flex-direction: column; /* Stack text and deadline vertically */
+    align-items: flex-start; /* Align text to the left */
+    flex-grow: 1; /* Ensure it takes up the available space */
+}
+
+.announcement-text {
+    font-weight: bold;
+    margin: 0;
+}
+
+.announcement-deadline {
+    font-size: 0.9em;
+    margin: 5px 0 0 0; /* Add some space above the deadline */
+}
+
+.delete-announcement-btn {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Space between the button and the right edge */
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.delete-announcement-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.delete-announcement-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.count-badge {
+    background-color: #ff6b6b; /* Red color for the count badge */
+    color: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 11rem;
+    display: inline-block;
+    text-align: center;
+    min-width: 24px;
+    height: 24px;
+    line-height: 16px;
+    position: relative;
+    right: 20px; /* Adjust positioning to the right */
+    top: 50%;
+    transform: translateY(-50%); /* Center the badge vertically */
+}
+.delete-icon {
+    font-size: 18px;
+    position: absolute;
+    right: 10px; /* Adjust this value to change the horizontal position */
+    top: 10px;   /* Adjust this value to change the vertical position */
+    cursor: pointer;
+    background: none;
+    border: none;
+    margin: 5px; /* You can add or adjust this for extra spacing */
+    padding: 5px; /* You can add or adjust this for extra spacing */
+}
