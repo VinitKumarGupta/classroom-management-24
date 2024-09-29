@@ -1,3 +1,235 @@
+// Arrays for students and assignments
+let students = [];
+let assignments = [];
+
+// Function to open the Add Student Form
+function openStudentForm() {
+    closeAssignmentForm();  // Close assignment form if open
+    document.getElementById("studentForm").style.display = "block";  // Show student form
+}
+
+// Function to close the Add Student Form
+function closeStudentForm() {
+    document.getElementById("studentForm").style.display = "none";
+    clearStudentForm();
+}
+
+// Function to add a student
+function addStudent() {
+    const studentName = document.getElementById("student-name").value;
+    const studentClass = document.getElementById("student-class").value;
+
+    if (studentName && studentClass) {
+        const student = {
+            name: studentName,
+            class: studentClass
+        };
+
+        // Add student to array and display the new student card
+        students.push(student);
+        appendStudentCard(student, students.length - 1);
+        closeStudentForm();
+        updateStudentProfileCount();  // Update count
+    }
+}
+
+
+// Function to append a new student card (without clearing existing ones)
+function appendStudentCard(student) {
+    const studentsSection = document.getElementById("students-section");
+    const noStudentsText = document.getElementById("no-students");
+
+    noStudentsText.style.display = 'none';  // Hide "No students" message
+
+    // Create a new student card
+    const studentCard = document.createElement("div");
+    studentCard.classList.add("student-card");
+
+    studentCard.innerHTML = `
+        <h3>${student.name}</h3>
+        <p>Class: ${student.class}</p>
+    `;
+
+    studentsSection.appendChild(studentCard);  // Append the new student card
+}
+
+// Function to clear the Add Student Form fields
+function clearStudentForm() {
+    document.getElementById("student-name").value = '';
+    document.getElementById("student-class").value = '';
+}
+
+// Function to open the Add Assignment Form
+function openAssignmentForm() {
+    closeStudentForm();  // Close student form if open
+    document.getElementById("assignmentForm").style.display = "block";  // Show assignment form
+}
+
+// Function to close the Add Assignment Form
+function closeAssignmentForm() {
+    document.getElementById("assignmentForm").style.display = "none";
+    clearAssignmentForm();
+}
+
+// Function to add an assignment
+function addAssignment() {
+    const assignmentName = document.getElementById("assignment-name").value;
+    const dueDate = document.getElementById("due-date").value;
+    const assignmentFile = document.getElementById("assignment-file").files[0];
+
+    if (assignmentName && dueDate && assignmentFile) {
+        const assignment = {
+            name: assignmentName,
+            dueDate: dueDate,
+            fileURL: URL.createObjectURL(assignmentFile)
+        };
+
+        // Add assignment to array and display the new assignment card
+        assignments.push(assignment);
+        appendAssignmentCard(assignment);
+        closeAssignmentForm();
+    }
+}
+
+function updateStudentProfileCount() {
+    const studentProfileCount = students.length;  // Count of students
+    document.getElementById("student-profile-count").textContent = studentProfileCount;
+}
+
+
+// Function to append a new assignment card (without clearing existing ones)
+function appendAssignmentCard(assignment) {
+    const assignmentsSection = document.getElementById("assignments-section");
+    const noAssignmentsText = document.getElementById("no-assignments");
+
+    noAssignmentsText.style.display = 'none';  // Hide "No assignments" message
+
+    // Create a new assignment card
+    const assignmentCard = document.createElement("div");
+    assignmentCard.classList.add("assignment-card");
+    
+    assignmentCard.onclick = function() {
+        window.open(assignment.fileURL, "_blank");
+    };
+
+    assignmentCard.innerHTML = `
+        <h3>${assignment.name}</h3>
+        <p>Due Date: ${assignment.dueDate}</p>
+    `;
+
+    assignmentsSection.appendChild(assignmentCard);  // Append the new assignment card
+}
+
+// Function to clear the Add Assignment Form fields
+function clearAssignmentForm() {
+    document.getElementById("assignment-name").value = '';
+    document.getElementById("due-date").value = '';
+    document.getElementById("assignment-file").value = '';
+}
+
+// ===================== DELETE FUNCTIONALITY ===================== //
+
+// Function to append a new student card (with delete button)
+function appendStudentCard(student, index) {
+    const studentsSection = document.getElementById("students-section");
+    const noStudentsText = document.getElementById("no-students");
+
+    noStudentsText.style.display = 'none';  // Hide "No students" message
+
+    // Create a new student card
+    const studentCard = document.createElement("div");
+    studentCard.classList.add("student-card");
+
+    // Add delete button
+    studentCard.innerHTML = `
+        <button class="delete-btn" onclick="deleteStudent(${index})">🗑️</button>
+        <h3>${student.name}</h3>
+        <p>Class: ${student.class}</p>
+    `;
+
+    studentsSection.appendChild(studentCard);  // Append the new student card
+}
+
+// Function to delete a student card
+function deleteStudent(index) {
+    students.splice(index, 1);  // Remove student from array
+    renderAllStudents();  // Re-render the list of students
+    updateStudentProfileCount();  // Update count
+}
+
+// Re-render all students after deletion
+function renderAllStudents() {
+    const studentsSection = document.getElementById("students-section");
+    studentsSection.innerHTML = '';  // Clear existing students
+
+    students.forEach((student, index) => {
+        appendStudentCard(student, index);  // Re-append each student
+    });
+
+    // Update the student profile count after rendering
+    updateStudentProfileCount();  // Ensure count is updated
+    
+    if (students.length === 0) {
+        document.getElementById("no-students").style.display = 'block';  // Show "No students" message
+    } else {
+        document.getElementById("no-students").style.display = 'none';  // Hide message
+    }
+}
+
+
+// Function to append a new assignment card (with delete button)
+function appendAssignmentCard(assignment, index) {
+    const assignmentsSection = document.getElementById("assignments-section");
+    const noAssignmentsText = document.getElementById("no-assignments");
+
+    noAssignmentsText.style.display = 'none';  // Hide "No assignments" message
+
+    // Create a new assignment card
+    const assignmentCard = document.createElement("div");
+    assignmentCard.classList.add("assignment-card");
+
+    // Add delete button
+    assignmentCard.innerHTML = `
+        <button class="delete-btn" onclick="deleteAssignment(${index})">🗑️</button>
+        <h3>${assignment.name}</h3>
+        <p>Due Date: ${assignment.dueDate}</p>
+    `;
+
+    assignmentCard.onclick = function() {
+        window.open(assignment.fileURL, "_blank");
+    };
+
+    assignmentsSection.appendChild(assignmentCard);  // Append the new assignment card
+}
+
+// Function to delete an assignment card
+function deleteAssignment(index) {
+    assignments.splice(index, 1);  // Remove assignment from array
+    renderAllAssignments();  // Re-render the list of assignments
+}
+
+// Re-render all assignments after deletion
+function renderAllAssignments() {
+    const assignmentsSection = document.getElementById("assignments-section");
+    assignmentsSection.innerHTML = '';  // Clear existing assignments
+
+    assignments.forEach((assignment, index) => {
+        appendAssignmentCard(assignment, index);  // Re-append each assignment
+    });
+
+    if (assignments.length === 0) {
+        document.getElementById("no-assignments").style.display = 'block';  // Show "No assignments" message
+    }
+}
+
+// Restrict past dates for the due date picker
+const today = new Date().toISOString().split('T')[0];
+document.getElementById("due-date").setAttribute('min', today);
+
+
+// ============================XXXXXXXXXXXXXXXXX============================ //
+
+
 // Function to check if selected date is today's date
 function isToday(selectedDate) {
     const today = new Date();
@@ -154,19 +386,61 @@ document.getElementById("date-picker").addEventListener("change", function () {
     console.log(`Date selected: ${selectedDate}`);
 });
 
-// Set default title as 'Today' on page load if today is selected
 document.addEventListener("DOMContentLoaded", function () {
-    const datePicker = document.getElementById("date-picker");
-    const dashboardTitle = document.getElementById("dashboard-title");
+    const postAnnouncementBtn = document.getElementById("post-announcement-btn");
+    const announcementInput = document.getElementById("announcement-input");
+    const announcementDeadline = document.getElementById("announcement-deadline");
+    const announcementDisplay = document.getElementById("announcement-display");
 
-    if (isToday(datePicker.value)) {
-        dashboardTitle.textContent = "Dashboard (Today)";
-    } else if (datePicker.value) {
-        dashboardTitle.textContent = `Dashboard (${formatDateToDDMMYYYY(
-            datePicker.value
-        )})`;
+    postAnnouncementBtn.addEventListener("click", function () {
+        const announcementText = announcementInput.value.trim();
+        const deadlineDate = announcementDeadline.value;
+
+        if (announcementText === "" || !deadlineDate) {
+            alert("Please provide both an announcement text and a deadline date.");
+            return;
+        }
+
+        // Format the date to DD/MM/YYYY format
+        const deadlineFormatted = new Date(deadlineDate).toLocaleDateString();
+
+        // Create the announcement card
+        const announcementCard = document.createElement("div");
+        announcementCard.className = "announcement-card";
+        announcementCard.innerHTML = `
+            <div class="announcement-text-container">
+                <p class="announcement-text">${announcementText}</p>
+                <p class="announcement-deadline">Deadline: ${deadlineFormatted}</p>
+            </div>
+            <button class="delete-announcement-btn">
+                <img src="https://img.icons8.com/ios-glyphs/30/000000/trash.png" alt="Delete">
+            </button>
+        `;
+
+        // Add delete functionality
+        announcementCard.querySelector(".delete-announcement-btn").addEventListener("click", function () {
+            announcementCard.remove();
+            updateAnnouncementCount();  // Update count
+        });
+
+        // Add the announcement card to the display
+        announcementDisplay.appendChild(announcementCard);
+
+        // Update the announcement count
+        updateAnnouncementCount();
+
+        // Clear input fields
+        announcementInput.value = "";
+        announcementDeadline.value = "";
+    });
+
+    // Function to update announcement count
+    function updateAnnouncementCount() {
+        const announcementCount = announcementDisplay.querySelectorAll(".announcement-card").length;
+        document.getElementById("announcement-count").textContent = announcementCount;
     }
 });
+
 // Handle announcement posting
 function handleAnnouncements() {
     const announcementInput = document.getElementById("announcement-input");
@@ -379,3 +653,25 @@ function showBox() {
         document.getElementById("class-1c").style.display = "block";
     }
 }
+
+//  SCROLL TO TOP BUTTON FUNCTIONALITY //
+
+// Get the button element
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+// When the user scrolls down 200px from the top of the document, show the button
+window.onscroll = function () {
+    if (
+        document.body.scrollTop > 10 ||
+        document.documentElement.scrollTop > 10
+    ) {
+        scrollToTopBtn.style.display = "block";
+    } else {
+        scrollToTopBtn.style.display = "none";
+    }
+};
+
+// When the user clicks on the button, scroll to the top of the document
+scrollToTopBtn.onclick = function () {
+    window.scrollTo({ top: 0, behavior: "smooth" }); // Smooth scroll to top
+};

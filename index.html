@@ -14,6 +14,7 @@
             href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"
             rel="stylesheet"
         />
+        <script defer src="script.js"></script>
     </head>
     <body>
         <div class="container">
@@ -39,8 +40,8 @@
                                     id="announcement-count"
                                     class="count-badge"
                                     >0</span
-                                ></a
-                            >
+                                >
+                            </a>
                         </li>
                         <li>
                             <a href="#student-profiles-section"
@@ -48,9 +49,9 @@
                                 <span
                                     id="student-profile-count"
                                     class="count-badge"
-                                    >3</span
-                                ></a
-                            >
+                                    >0</span
+                                >
+                            </a>
                         </li>
                         <li><a href="#calendar-section">Your Time-Table</a></li>
                     </ul>
@@ -58,27 +59,100 @@
             </div>
             <div class="main-content">
                 <div class="header">
-                    <h2 id="dashboard-title">Dashboard (Today)</h2>
+                    <h1 id="dashboard-title">Dashboard 📘</h1>
+                    <select id="class-selection" onchange="showClassDetails()">
+                        <option value="">Select Class</option>
+                        <option value="class-1a">Class 1-A</option>
+                        <option value="class-1b">Class 1-B</option>
+                        <option value="class-1c">Class 1-C</option>
+                    </select>
                     <div class="header-buttons">
                         <button class="settings-btn">Settings</button>
                         <button class="logout-btn">Logout</button>
                     </div>
                 </div>
+
                 <div class="sections">
-                    <!-- Attendance Tracking Section -->
+                    <!-- Announcements Section -->
+                    <div class="section" id="announcements-section">
+                        <h2>Announcements & Notifications</h2>
+                        <input
+                            type="text"
+                            id="announcement-input"
+                            placeholder="Enter your announcement here"
+                        />
+                        <input type="date" id="announcement-deadline" />
+                        <button id="post-announcement-btn">
+                            Post Announcement
+                        </button>
+                        <div
+                            id="announcement-display"
+                            class="announcement-display"
+                        >
+                            <p
+                                id="no-announcements"
+                                style="text-align: center; font-weight: bold"
+                            >
+                                NO ANNOUNCEMENTS
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="container2">
+                        <!-- Assignment Section -->
+                        <div class="header">
+                            <h2>Assignments</h2>
+                            <button
+                                class="add-btn"
+                                onclick="openAssignmentForm()"
+                            >
+                                + Add Assignment
+                            </button>
+                        </div>
+
+                        <!-- Form Pop-up for Assignment Details -->
+                        <div id="assignmentForm" class="form-popup">
+                            <form class="form-container">
+                                <h2>Add Assignment</h2>
+                                <input
+                                    type="text"
+                                    id="assignment-name"
+                                    placeholder="Assignment Name"
+                                    required
+                                />
+                                <input type="date" id="due-date" required />
+                                <input
+                                    type="file"
+                                    id="assignment-file"
+                                    accept=".pdf,.ppt,.docx,.doc"
+                                    required
+                                />
+                                <button type="button" onclick="addAssignment()">
+                                    Add Assignment
+                                </button>
+                                <button
+                                    type="button"
+                                    onclick="closeAssignmentForm()"
+                                >
+                                    Close
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Assignments Section -->
+                        <div
+                            id="assignments-section"
+                            class="assignments-section"
+                        >
+                            <p id="no-assignments">No assignments added yet.</p>
+                        </div>
+                    </div>
+                    <!-- Attendance section -->
+
                     <div class="section" id="attendance-section">
                         <div class="section-header">
-                            <h3>Attendance Tracking</h3>
+                            <h2>Manage Attendance</h2>
                             <input type="date" id="date-picker" />
-                            <select
-                                id="class-selection"
-                                onchange="showClassDetails()"
-                            >
-                                <option value="">Select Class</option>
-                                <option value="class-1a">Class 1-A</option>
-                                <option value="class-1b">Class 1-B</option>
-                                <option value="class-1c">Class 1-C</option>
-                            </select>
                         </div>
                         <div class="attendance-tracking">
                             <div
@@ -105,199 +179,55 @@
                         </div>
                     </div>
 
-                    <!-- Homework Assignment Management Section -->
-                    <div class="section" id="homework-section">
-                        <div class="section-header-1">
-                            <h3>Homework Assignment Management</h3>
-                            <div class="file-upload-inline">
-                                <label
-                                    for="file-upload"
-                                    class="file-upload-label"
-                                    >Upload Assignment:</label
-                                >
-                                <input
-                                    type="file"
-                                    id="file-upload"
-                                    accept=".pdf, .ppt, .doc, .docx"
-                                />
-                            </div>
-                        </div>
-                        <div class="homework-tracking">
-                            <div class="homework-card">
-                                <p>Mathematics</p>
-                                <p>Assignment: Algebra</p>
-                                <p>Due: 10th Oct</p>
-                            </div>
-                            <div class="homework-card">
-                                <p>Science</p>
-                                <p>Assignment: Biology</p>
-                                <p>Due: 12th Oct</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Announcements & Notifications Section -->
-                    <div class="section" id="announcements-section">
-                        <h3>Announcements & Notifications</h3>
-                        <input
-                            type="text"
-                            id="announcement-input"
-                            placeholder="Enter your announcement here"
-                        />
-                        <input type="date" id="announcement-deadline" />
-                        <button id="post-announcement-btn">
-                            Post Announcement
-                        </button>
-                        <div
-                            id="announcement-display"
-                            class="announcement-display"
-                        >
-                            <p
-                                id="no-announcements"
-                                style="text-align: center; font-weight: bold"
-                            >
-                                NO ANNOUNCEMENTS
-                            </p>
-                        </div>
-                    </div>
-
                     <!-- Student Profiles Section -->
-                    <div class="section" id="student-profiles-section">
-                        <h3>Student Profiles</h3>
-                        <div class="student-profiles">
-                            <div class="profile-card">
-                                <img
-                                    src="https://via.placeholder.com/100"
-                                    alt="Anna Smith"
-                                />
-                                <p>Anna Smith</p>
-                                <p>Grade: A</p>
-                            </div>
-                            <div class="profile-card">
-                                <img
-                                    src="https://via.placeholder.com/100"
-                                    alt="John Doe"
-                                />
-                                <p>John Doe</p>
-                                <p>Grade: B</p>
-                            </div>
-                            <div class="profile-card">
-                                <img
-                                    src="https://via.placeholder.com/100"
-                                    alt="Emily Davis"
-                                />
-                                <p>Emily Davis</p>
-                                <p>Grade: A</p>
-                            </div>
-                        </div>
+                    <div class="header">
+                        <h2>Student Profiles</h2>
+                        <button class="add-btn" onclick="openStudentForm()">
+                            + Add Student
+                        </button>
                     </div>
 
-                    <!-- Calendar Section -->
-                    <div class="section" id="calendar-section">
-                        <h3>Time-Table</h3>
-                        <img
-                            src="./teacher-timetable.png"
-                            class="faculty-timetable"
-                            alt="timetable"
-                        />
+                    <!-- Form Pop-up for Student Details -->
+                    <div id="studentForm" class="form-popup">
+                        <form class="form-container">
+                            <h2>Add Student</h2>
+                            <input
+                                type="text"
+                                id="student-name"
+                                placeholder="Student Name"
+                                required
+                            />
+                            <input
+                                type="text"
+                                id="student-class"
+                                placeholder="Class"
+                                required
+                            />
+                            <button type="button" onclick="addStudent()">
+                                Add
+                            </button>
+                            <button type="button" onclick="closeStudentForm()">
+                                Close
+                            </button>
+                        </form>
                     </div>
+
+                    <!-- Students Section -->
+                    <div id="students-section" class="students-section">
+                        <p id="no-students">No students added yet.</p>
+                    </div>
+
+                    <div class="your-timetable">
+                        <h2>Your Time-Table</h2>
+                        <!-- Add the image below -->
+                        <img src="./teacher-timetable.png" alt="Timetable" class="timetable-image">
+                    </div>
+                    
                 </div>
             </div>
         </div>
 
-        <script>
-            // Function to show the class details based on dropdown selection
-            function showClassDetails() {
-                const selectedClass =
-                    document.getElementById("class-selection").value;
-
-                // Hide all class cards
-                document.getElementById("class-1a").style.display = "none";
-                document.getElementById("class-1b").style.display = "none";
-                document.getElementById("class-1c").style.display = "none";
-
-                // Show the selected class card
-                if (selectedClass) {
-                    document.getElementById(selectedClass).style.display =
-                        "block";
-                }
-            }
-
-            // Student profile count logic
-            const studentProfileCountElement = document.getElementById(
-                "student-profile-count"
-            );
-            let studentProfileCount = 3; // Initial value based on your HTML
-
-            // Announcement count logic
-            const announcementCountElement =
-                document.getElementById("announcement-count");
-            let announcementCount = 0; // Starting from 0
-
-            // Post Announcement Button logic
-            const postAnnouncementBtn = document.getElementById(
-                "post-announcement-btn"
-            );
-            const announcementInput =
-                document.getElementById("announcement-input");
-            const announcementDeadline = document.getElementById(
-                "announcement-deadline"
-            );
-            const announcementDisplay = document.getElementById(
-                "announcement-display"
-            );
-            const noAnnouncementsText =
-                document.getElementById("no-announcements");
-
-            // Function to delete an announcement
-            function deleteAnnouncement(element) {
-                element.parentNode.remove();
-                announcementCount--;
-                announcementCountElement.textContent = announcementCount;
-
-                // If no announcements, show the default message
-                if (announcementCount === 0) {
-                    noAnnouncementsText.style.display = "block";
-                }
-            }
-
-            // Function to add a new announcement
-            function addAnnouncement() {
-                const announcementText = announcementInput.value.trim();
-                const deadlineText = announcementDeadline.value;
-
-                if (announcementText !== "" && deadlineText !== "") {
-                    // Hide "NO ANNOUNCEMENTS" message if it's displayed
-                    noAnnouncementsText.style.display = "none";
-
-                    // Create a new announcement element
-                    const newAnnouncement = document.createElement("div");
-                    newAnnouncement.innerHTML = `
-            <p class="announcement-text">${announcementText}</p>
-            <p class="deadline-text">Deadline: ${new Date(
-                deadlineText
-            ).toLocaleDateString()}</p>
-            <button class="delete-icon" onclick="deleteAnnouncement(this)">🗑️</button>
-        `;
-                    newAnnouncement.classList.add("announcement-item");
-                    announcementDisplay.appendChild(newAnnouncement);
-
-                    // Clear input fields
-                    announcementInput.value = "";
-                    announcementDeadline.value = "";
-
-                    // Increment and update announcement count
-                    announcementCount++;
-                    announcementCountElement.textContent = announcementCount;
-                } else {
-                    alert(
-                        "Please fill in both the announcement and the deadline."
-                    );
-                }
-            }
-
-            // Event listener for posting the announcement
-            postAnnouncementBtn.addEventListener("click", addAnnouncement);
-        </script>
+        <!-- Scroll to Top Button -->
+        <button id="scrollToTopBtn" title="Go to top">⬆</button>
     </body>
 </html>
